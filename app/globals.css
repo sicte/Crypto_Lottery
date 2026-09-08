@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+:root {
+  --neon-green: #39ff14;
+  --neon-pink: #ff10f0;
+  --neon-blue: #00f0ff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0a0a0f;
+  color: #e0e0e0;
+  font-family: "Space Grotesk", sans-serif;
+  min-height: 100vh;
+}
+
+/* Neon text glow */
+.neon-text {
+  text-shadow:
+    0 0 7px var(--neon-green),
+    0 0 10px var(--neon-green),
+    0 0 21px var(--neon-green),
+    0 0 42px #0fa;
+}
+
+.neon-text-pink {
+  text-shadow:
+    0 0 7px var(--neon-pink),
+    0 0 10px var(--neon-pink),
+    0 0 21px var(--neon-pink);
+}
+
+.neon-text-blue {
+  text-shadow:
+    0 0 7px var(--neon-blue),
+    0 0 10px var(--neon-blue),
+    0 0 21px var(--neon-blue);
+}
+
+/* Arcade button style */
+.btn-arcade {
+  position: relative;
+  background: linear-gradient(180deg, #1a1a25 0%, #12121a 100%);
+  border: 2px solid var(--neon-green);
+  color: var(--neon-green);
+  padding: 12px 28px;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 12px) 0,
+    100% 12px,
+    100% 100%,
+    12px 100%,
+    0 calc(100% - 12px)
+  );
+}
+
+.btn-arcade:hover {
+  background: rgba(57, 255, 20, 0.1);
+  box-shadow:
+    0 0 15px rgba(57, 255, 20, 0.3),
+    inset 0 0 15px rgba(57, 255, 20, 0.1);
+  transform: translateY(-1px);
+}
+
+.btn-arcade:active {
+  transform: translateY(1px);
+}
+
+.btn-arcade:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-pink {
+  border-color: var(--neon-pink);
+  color: var(--neon-pink);
+}
+
+.btn-pink:hover {
+  background: rgba(255, 16, 240, 0.1);
+  box-shadow:
+    0 0 15px rgba(255, 16, 240, 0.3),
+    inset 0 0 15px rgba(255, 16, 240, 0.1);
+}
+
+/* Card container */
+.arcade-card {
+  background: linear-gradient(135deg, #12121a 0%, #1a1a25 100%);
+  border: 1px solid rgba(57, 255, 20, 0.15);
+  clip-path: polygon(
+    0 0,
+    calc(100% - 16px) 0,
+    100% 16px,
+    100% 100%,
+    16px 100%,
+    0 calc(100% - 16px)
+  );
+}
+
+/* Progress bar */
+.progress-track {
+  background: #1a1a25;
+  border: 1px solid rgba(57, 255, 20, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  height: 28px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--neon-green) 0%,
+    #0fa 50%,
+    var(--neon-blue) 100%
+  );
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+  position: relative;
+}
+
+.progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 100%
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Ticket count display */
+.ticket-count {
+  font-family: "JetBrains Mono", monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Scanline overlay */
+.scanlines::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.03) 0px,
+    rgba(0, 0, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 50;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(57, 255, 20, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(57, 255, 20, 0.5);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .btn-arcade {
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+}
